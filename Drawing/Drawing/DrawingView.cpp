@@ -27,6 +27,7 @@ BEGIN_MESSAGE_MAP(CDrawingView, CView)
 	ON_COMMAND(ID_FILE_PRINT, &CView::OnFilePrint)
 	ON_COMMAND(ID_FILE_PRINT_DIRECT, &CView::OnFilePrint)
 	ON_COMMAND(ID_FILE_PRINT_PREVIEW, &CView::OnFilePrintPreview)
+	ON_WM_LBUTTONDOWN()
 END_MESSAGE_MAP()
 
 // CDrawingView 생성/소멸
@@ -57,7 +58,7 @@ void CDrawingView::OnDraw(CDC* pDC)
 	ASSERT_VALID(pDoc);
 	if (!pDoc)
 		return;
-	pDC->TextOut(0, 0, L"안녕하세요");
+	pDC->TextOut(m_pt.x, m_pt.y, L"안녕하세요");
 	pDC->Rectangle(0, 20, 300, 200);
 	// TODO: 여기에 원시 데이터에 대한 그리기 코드를 추가합니다.
 }
@@ -104,3 +105,12 @@ CDrawingDoc* CDrawingView::GetDocument() const // 디버그되지 않은 버전�
 
 
 // CDrawingView 메시지 처리기
+
+
+void CDrawingView::OnLButtonDown(UINT nFlags, CPoint point)
+{
+	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+	m_pt = point;
+	Invalidate();
+	CView::OnLButtonDown(nFlags, point);
+}

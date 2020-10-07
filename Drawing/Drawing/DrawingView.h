@@ -40,6 +40,9 @@ protected:
 // 생성된 메시지 맵 함수
 protected:
 	DECLARE_MESSAGE_MAP()
+public:
+	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
+	CPoint m_pt;
 };
 
 #ifndef _DEBUG  // DrawingView.cpp의 디버그 버전
